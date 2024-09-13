@@ -99,7 +99,7 @@ seed_examples:
           ...
       }
 document:
-  repo: https://github.com/eformat/my_knowledge.git
-  commit: 2c705da5699e05ac42d842c900a89373ba915e35
+  repo: https://github.com/eformat/my_knowledge2.git
+  commit: 21f0088db6cbbc0e7c58760b2efe19b2188c8ed8
   patterns: 
     - "*.md"
