@@ -1,10 +1,10 @@
-task_description: "Teach the model about Java Exceptions"
 domain: tech_industry
 created_by: eformat
 version: 3
+document_outline: Information about common Java code Exceptions and how to fix them.
 seed_examples:
   - context: |
-      Java NullPointerException is thrown when an application attempts to use null in a case where an object
+      A Java NullPointerException is thrown when an application attempts to use null in a case where an object
       is required. Applications should throw instances of this class to indicate other illegal uses of the
       null object. NullPointerException objects may be constructed by the virtual machine as if suppression
       were disabled and/or the stack trace was not writable.
@@ -51,7 +51,7 @@ seed_examples:
             return str.length(); // fixed
           }
   - context: |
-      Java ArrayIndexOutOfBoundsException is thrown to indicate that an array has been accessed with an illegal index.
+      A Java ArrayIndexOutOfBoundsException is thrown to indicate that an array has been accessed with an illegal index.
       The index is either negative or greater than or equal to the size of the array.
     questions_and_answers:
       - question: What is a java ArrayIndexOutOfBoundsException?
@@ -94,7 +94,7 @@ seed_examples:
 
           Change the iterator from i <= numbers.length to i < numbers.length so we do not exceed the Array length.
   - context: |
-      Java ArithmeticException is thrown when an exceptional arithmetic condition has occurred.
+      A Java ArithmeticException is thrown when an exceptional arithmetic condition has occurred.
       For example, an integer "divide by zero" throws an instance of this class.
       ArithmeticException objects may be constructed by the virtual machine as if suppression were disabled and/or
       the stack trace was not writable.
@@ -128,7 +128,12 @@ seed_examples:
                 int x = 9/9;
               }
             }
-  - context:
+  - context: |
+      A Java FileNotFoundException signals that an attempt to open the file denoted by a specified pathname has failed.
+      This exception will be thrown by the FileInputStream, FileOutputStream, and RandomAccessFile constructors when
+      a file with the specified pathname does not exist. It will also be thrown by these constructors if the file
+      does exist but for some reason is inaccessible, for example when an attempt is made to open a read-only
+      file for writing.
     questions_and_answers:
       - question: What is a java FileNotFoundException?
         answer: |
@@ -152,7 +157,9 @@ seed_examples:
             } catch (FileNotFoundException ex) {
                 LOG.warn("Error Occurred when reading the optional file " + notExistFile, ex);
             }
-  - context:
+  - context: |
+      A Java ClassNotFoundException means the JVM has traversed the entire classpath and not found
+      the class you've attempted to reference.
     questions_and_answers:
       - question: What is a java ClassNotFoundException?
         answer: |
@@ -189,7 +196,9 @@ seed_examples:
                 Class.forName("java.lang.ClassNotFoundException");
                 return 0;
             }
-  - context:
+  - context: |
+      A Java NumberFormatException is thrown to indicate that the application has attempted to convert a string to one
+      of the numeric types, but that the string does not have the appropriate format.
     questions_and_answers:
       - question: What is a java NumberFormatException?
         answer: |
