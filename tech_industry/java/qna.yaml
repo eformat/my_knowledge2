@@ -1,103 +1,205 @@
 task_description: "Teach the model about Java Exceptions"
 domain: tech_industry
 created_by: eformat
+version: 3
 seed_examples:
-  - question: What is a java NullPointerException, and how do I fix it?
-    answer: |
-      NullPointerExceptions are exceptions that occur when you try to use a reference that points to no location in memory (null) as though it were referencing an object.
-      Calling a method on a null reference or trying to access a field of a null reference will trigger a NullPointerException.
-      These are the most common, but other ways are listed on the NullPointerException javadoc page - https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html
+  - context: |
+      Java NullPointerException is thrown when an application attempts to use null in a case where an object is required.
+      Applications should throw instances of this class to indicate other illegal uses of the null object.
+      NullPointerException objects may be constructed by the virtual machine as if suppression were disabled and/or the stack trace was not writable.
+    questions_and_answers:
+      - question: What is a java NullPointerException?
+        answer: |
+          NullPointerExceptions are exceptions that occur when you try to use a reference that points to no location in memory (null) as though it were referencing an object.
+          Calling a method on a null reference or trying to access a field of a null reference will trigger a NullPointerException.
+          These are the most common, but other ways are listed on the NullPointerException javadoc page - https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html
+      - question: How do i fix a java NullPointerException?
+        answer: |
+          Here are all the situations in which a NullPointerException occurs, that are directly mentioned by the Java Language Specification:
+          - Accessing (i.e. getting or setting) an instance field of a null reference. (static fields don't count!)
+          - Calling an instance method of a null reference. (static methods don't count!)
+          - throw null;
+          - Accessing elements of a null array.
+          - Synchronising on null - synchronized (someNullReference) { ... }
+          - Any integer/floating point operator can throw a NullPointerException if one of its operands is a boxed null reference
+          - An unboxing conversion throws a NullPointerException if the boxed value is null.
+          - Calling super on a null reference throws a NullPointerException.
+          - Using a for (element : iterable) loop to loop through a null collection/array.
+          - switch (foo) { ... } (whether its an expression or statement) can throw a NullPointerException when foo is null.
+          - foo.new SomeInnerClass() throws a NullPointerException when foo is null.
+          - Method references of the form name1::name2 or primaryExpression::name throws a NullPointerException when evaluated when name1 or primaryExpression evaluates to null.
+      - question: Can you give me an example of a java NullPointerException and its fix?
+        answer: |
+          Here is an example of a java NullPointerException
 
-      Here are all the situations in which a NullPointerException occurs, that are directly mentioned by the Java Language Specification:
-      - Accessing (i.e. getting or setting) an instance field of a null reference. (static fields don't count!)
-      - Calling an instance method of a null reference. (static methods don't count!)
-      - throw null;
-      - Accessing elements of a null array.
-      - Synchronising on null - synchronized (someNullReference) { ... }
-      - Any integer/floating point operator can throw a NullPointerException if one of its operands is a boxed null reference
-      - An unboxing conversion throws a NullPointerException if the boxed value is null.
-      - Calling super on a null reference throws a NullPointerException.
-      - Using a for (element : iterable) loop to loop through a null collection/array.
-      - switch (foo) { ... } (whether its an expression or statement) can throw a NullPointerException when foo is null.
-      - foo.new SomeInnerClass() throws a NullPointerException when foo is null.
-      - Method references of the form name1::name2 or primaryExpression::name throws a NullPointerException when evaluated when name1 or primaryExpression evaluates to null.
-  - question: What is a java ArrayIndexOutOfBoundsException, and how do I fix it ?
-    answer: |
-      As we know, in Java, an array is a static data structure, and we define its size at the time of creation.
-      We access the elements of an array using indices. Indexing in an array starts from zero and must never be greater than or equal to the size of the array.
-      In short, the rule of thumb is 0 <= index < (size of array).
-      ArrayIndexOutOfBoundsException occurs when we access an array, or a Collection, that is backed by an array with an invalid index. This means that the index is either less than zero or greater than or equal to the size of the array.
-      Additionally, bound checking happens at runtime. So, ArrayIndexOutOfBoundsException is a runtime exception. Therefore, we need to be extra careful when accessing the boundary elements of an array.
+          public int nullpointer() {
+            String str = null;
+            return str.length(); // NullPointerException
+          }
 
-      Accessing the array elements out of these bounds would throw an ArrayIndexOutOfBoundsException:
+          This can be fixed by initializing the String str:
 
-      int[] numbers = new int[] {1, 2, 3, 4, 5};
-      int lastNumber = numbers[5];
+          public int nullpointer() {
+            String str = "";
+            return str.length(); // fixed
+          }
+  - context: |
+      Java ArrayIndexOutOfBoundsException is thrown to indicate that an array has been accessed with an illegal index.
+      The index is either negative or greater than or equal to the size of the array.
+    questions_and_answers:
+      - question: What is a java ArrayIndexOutOfBoundsException?
+        answer: |
+          As we know, in Java, an array is a static data structure, and we define its size at the time of creation.
+          We access the elements of an array using indices. Indexing in an array starts from zero and must never be greater than or equal to the size of the array.
+          In short, the rule of thumb is 0 <= index < (size of array).
+      - question: How do i fix a java ArrayIndexOutOfBoundsException?
+        answer: |
+          ArrayIndexOutOfBoundsException occurs when we access an array, or a Collection, that is backed by an array with an invalid index. This means that the index is either less than zero or greater than or equal to the size of the array.
+          Additionally, bound checking happens at runtime. So, ArrayIndexOutOfBoundsException is a runtime exception. Therefore, we need to be extra careful when accessing the boundary elements of an array.
+      - question: Can you give me an example of a java ArrayIndexOutOfBoundsException and its fix?
+        answer: |
+          Accessing the array elements out of these bounds would throw an ArrayIndexOutOfBoundsException:
 
-      If we try to access the elements of the List returned by Arrays.asList() beyond this range, we would get an ArrayIndexOutOfBoundsException:
+            int[] numbers = new int[] {1, 2, 3, 4, 5};
+            int lastNumber = numbers[10];
 
-      List<Integer> numbersList = Arrays.asList(1, 2, 3, 4, 5);
-      int lastNumber = numbersList.get(5);
+          Change numbers[10] so that it is smaller than the Array size.
 
-      Sometimes, while iterating over an array in a for loop, we might put a wrong termination expression.
-      Instead of terminating the index at one less than the length of the array, we might end up iterating until its length:
+          If we try to access the elements of the List returned by Arrays.asList() beyond this range, we would get an ArrayIndexOutOfBoundsException:
 
-      int sum = 0;
-      for (int i = 0; i <= numbers.length; i++) {
-          sum += numbers[i];
-      }
-  - question: What is a java ArithmeticException "/ by zero", and how do I fix it ?
-    answer: |
-      The ArithmeticException occurs when an arithmetic operation yields an error.
-      
-      The ArithmeticException is thrown in the following example because it divides an integer by zero:
+            List<Integer> numbersList = Arrays.asList(1, 2, 3, 4, 5);
+            int lastNumber = numbersList.get(5);
 
-      public class DivideByZero {
-        public static void main(String[] args) {
-          int x = 9/0;
-        }
-      }
+          Change numbersList.get(5) so that it is smaller than the List size.
 
-      To fix it, make sure you do not use zero as a divisor.
-  - question: What is a java FileNotFoundException, and how do I fix it ?
-    answer: |
-      Signals that an attempt to open the file denoted by a specified pathname has failed.
-      This exception will be thrown by the FileInputStream, FileOutputStream, and RandomAccessFile constructors when a file with the specified pathname does not exist.
-      It will also be thrown by these constructors if the file does exist but for some reason is inaccessible, for example when an attempt is made to open a read-only file for writing.
-      
-      Since FileNotFoundException is a checked exception, a try-catch block should be used to handle it. The try block should contain the lines of code that can throw the exception and the catch block should catch and handle the exception appropriately. For example:
+          Sometimes, while iterating over an array in a for loop, we might put a wrong termination expression.
+          Instead of terminating the index at one less than the length of the array, we might end up iterating until its length:
 
-      Path notExistFile = tempDir.resolve("dummy.notExist");
-      try {
-          FileReader fileReader = new FileReader(notExistFile.toFile());
-      } catch (FileNotFoundException ex) {
-          LOG.warn("Error Occurred when reading the optional file " + notExistFile, ex);
-      }
-  - question: What is a java ClassNotFoundException, and how do I fix it ?
-    answer: |
-      When you get a ClassNotFoundException, it means the JVM has traversed the entire classpath and not found the class you've attempted to reference. The solution, as so often in the Java world, is to check your classpath. 
-      You define a classpath on the command line by saying java -cp and then your classpath.
-      Your classpath is broken (which is a very common problem in the Java world).
-      Depending on how you start your application, you need to revise the argument to -cp, your Class-Path entry in MANIFEST.MF or your disk layout.
+            int sum = 0;
+            for (int i = 0; i <= numbers.length; i++) {
+              sum += numbers[i];
+            }
+          
+          Change the iterator from i <= numbers.length to i < numbers.length so we do not exceed the Array length.
+  - context: |
+      Java ArithmeticException is thrown when an exceptional arithmetic condition has occurred.
+      For example, an integer "divide by zero" throws an instance of this class.
+      ArithmeticException objects may be constructed by the virtual machine as if suppression were disabled and/or the stack trace was not writable.
+    questions_and_answers:
+      - question: What is a java ArithmeticException "/ by zero" ?
+        answer: |
+          The ArithmeticException occurs when an arithmetic operation yields an error.
+      - question: How do i fix a java ArithmeticException?
+        answer: |
+          There are two strategies to handle ArithmeticException.
 
-      If you know the path of the class or the jar containing the class then add it to your classpath while running it. You can use the classpath as mentioned here:
-        on Windows
-          java -classpath .;yourjar.jar YourMainClass
-        on UNIX/Linux
-          java -classpath .:yourjar.jar YourMainClass
-  - question: What is a java NumberFormatException, and how do I fix it ?
-    answer: |
-      The NumberFormatException occurs when an attempt is made to convert a string with improper format into a numeric value.
-      That means, when it is not possible to convert a string in any numeric type (float, int, etc), this exception is thrown. 
-      It is a Runtime Exception (Unchecked Exception) in Java.
+          We can handle the arithmetic exception on our own using the try-catch block.
+          For non-terminating decimal expansion, all we have to do is to wrap the line where division is occurring inside the try block.
 
-      Check before parsing or handle Exception properly.
+          Otherwise we can make sure we never use zero as a divisor by checking the divisor is greater than zero.
+      - question: Can you give me an example of a java ArithmeticException and its fix?
+        answer: |
+          The ArithmeticException is thrown in the following example because it divides an integer by zero:
 
-      try{
-        int i = Integer.parseInt(input);
-      } catch(NumberFormatException ex){ // handle your exception
-          ...
-      }
+            public class DivideByZero {
+              public static void main(String[] args) {
+                int x = 9/0;
+              }
+            }
+
+          To fix it, make sure you do not use zero as a divisor:
+
+            public class DoNotDivideByZero {
+              public static void main(String[] args) {
+                int x = 9/9;
+              }
+            }
+  - context:
+    questions_and_answers:
+      - question: What is a java FileNotFoundException?
+        answer: |
+          Signals that an attempt to open the file denoted by a specified pathname has failed.
+          This exception will be thrown by the FileInputStream, FileOutputStream, and RandomAccessFile constructors when a file with the specified pathname does not exist.
+          It will also be thrown by these constructors if the file does exist but for some reason is inaccessible, for example when an attempt is made to open a read-only file for writing.
+      - question: How do i fix a java FileNotFoundException?
+        answer: |
+          Since FileNotFoundException is a checked exception, a try-catch block should be used to handle it. The try block should contain the lines of code that can throw the exception and the catch block should catch and handle the exception appropriately.
+      - question: Can you give me an example of a java FileNotFoundException and its fix?
+        answer: |
+          Wrap the call to create the file in a try/catch block. For example:
+
+            Path notExistFile = tempDir.resolve("dummy.notExist");
+            try {
+                FileReader fileReader = new FileReader(notExistFile.toFile());
+            } catch (FileNotFoundException ex) {
+                LOG.warn("Error Occurred when reading the optional file " + notExistFile, ex);
+            }
+  - context:
+    questions_and_answers:
+      - question: What is a java ClassNotFoundException?
+        answer: |
+          When you get a ClassNotFoundException, it means the JVM has traversed the entire classpath and not found the class you've attempted to reference. The solution, as so often in the Java world, is to check your classpath.
+          ClassNotFoundException is thrown when an application tries to load in a class through its string name using:
+            - The forName method in class Class.
+            - The findSystemClass method in class ClassLoader .
+            - The loadClass method in class ClassLoader.
+          but no definition for the class with the specified name could be found.
+      - question: How do i fix a java ClassNotFoundException?
+        answer: |
+          You define a classpath on the command line by saying java -cp and then your classpath.
+          Your classpath is broken (which is a very common problem in the Java world).
+          Depending on how you start your application, you need to revise the argument to -cp, your Class-Path entry in MANIFEST.MF or your disk layout.
+          If you know the path of the class or the jar containing the class then add it to your classpath while running it. You can use the classpath as mentioned here:
+            on Windows
+              java -classpath .;yourjar.jar YourMainClass
+            on UNIX/Linux
+              java -classpath .:yourjar.jar YourMainClass
+      - question: Can you give me an example of a java ClassNotFoundException and its fix?
+        answer: |
+          This will throw a ClassNotFoundException:
+
+            public int classnotfound() throws ClassNotFoundException {
+                Class.forName("non.existent.ClassName");
+                return 0;
+            }
+
+          Change the "non.existent.ClassName" to a class that exists e.g
+
+            public int classnotfound() throws ClassNotFoundException {
+                Class.forName("java.lang.ClassNotFoundException");
+                return 0;
+            }
+  - context:
+    questions_and_answers:
+      - question: What is a java NumberFormatException?
+        answer: |
+          The NumberFormatException occurs when an attempt is made to convert a string with improper format into a numeric value.
+          That means, when it is not possible to convert a string in any numeric type (float, int, etc), this exception is thrown. 
+          It is a Runtime Exception (Unchecked Exception) in Java.
+      - question: How do i fix a java NumberFormatException?
+        answer: |
+          Check before parsing or handle Exception properly or wrap your call in a try/catch block.
+
+          try {
+            int i = Integer.parseInt(input);
+          } catch(NumberFormatException ex) { // handle your exception
+              ...
+          }
+      - question: Can you give me an example of a java NumberFormatException and its fix?
+        answer: |
+          Here is an example of a NumberFormatException:
+
+            public int numberformat() {
+                String invalidNumber = "abc";
+                return Integer.parseInt(invalidNumber);
+
+            }
+          Change the String to a valid number e.g
+
+            public int numberformat() {
+                String validNumber = "123";
+                return Integer.parseInt(validNumber);
+            }
 document:
   repo: https://github.com/eformat/my_knowledge2.git
   commit: b3786093f12d947e6a1a4e3d0edb4bceb037e0ca
