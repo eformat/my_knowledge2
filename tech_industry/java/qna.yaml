@@ -4,9 +4,9 @@ created_by: eformat
 version: 3
 seed_examples:
   - context: |
-      Java NullPointerException is thrown when an application attempts to use null in a case where an object 
+      Java NullPointerException is thrown when an application attempts to use null in a case where an object
       is required. Applications should throw instances of this class to indicate other illegal uses of the
-      null object. NullPointerException objects may be constructed by the virtual machine as if suppression 
+      null object. NullPointerException objects may be constructed by the virtual machine as if suppression
       were disabled and/or the stack trace was not writable.
     questions_and_answers:
       - question: What is a java NullPointerException?
@@ -18,14 +18,14 @@ seed_examples:
           - https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html
       - question: How do i fix a java NullPointerException?
         answer: |
-          Here are all the situations in which a NullPointerException occurs, that are directly mentioned by the 
+          Here are all the situations in which a NullPointerException occurs, that are directly mentioned by the
           Java Language Specification:
           - Accessing (i.e. getting or setting) an instance field of a null reference. (static fields don't count!)
           - Calling an instance method of a null reference. (static methods don't count!)
           - throw null;
           - Accessing elements of a null array.
           - Synchronising on null - synchronized (someNullReference) { ... }
-          - Any integer/floating point operator can throw a NullPointerException if one of its operands is 
+          - Any integer/floating point operator can throw a NullPointerException if one of its operands is
             a boxed null reference
           - An unboxing conversion throws a NullPointerException if the boxed value is null.
           - Calling super on a null reference throws a NullPointerException.
@@ -57,12 +57,12 @@ seed_examples:
       - question: What is a java ArrayIndexOutOfBoundsException?
         answer: |
           As we know, in Java, an array is a static data structure, and we define its size at the time of creation.
-          We access the elements of an array using indices. Indexing in an array starts from zero and must never be 
+          We access the elements of an array using indices. Indexing in an array starts from zero and must never be
           greater than or equal to the size of the array. In short, the rule of thumb is 0 <= index < (size of array).
       - question: How do i fix a java ArrayIndexOutOfBoundsException?
         answer: |
           ArrayIndexOutOfBoundsException occurs when we access an array, or a Collection, that is backed by an array
-          with an invalid index. This means that the index is either less than zero or greater than or equal 
+          with an invalid index. This means that the index is either less than zero or greater than or equal
           to the size of the array. Additionally, bound checking happens at runtime. So, ArrayIndexOutOfBoundsException
           is a runtime exception. Therefore, we need to be extra careful when accessing the boundary
           elements of an array.
@@ -91,7 +91,7 @@ seed_examples:
             for (int i = 0; i <= numbers.length; i++) {
               sum += numbers[i];
             }
-          
+
           Change the iterator from i <= numbers.length to i < numbers.length so we do not exceed the Array length.
   - context: |
       Java ArithmeticException is thrown when an exceptional arithmetic condition has occurred.
@@ -139,8 +139,8 @@ seed_examples:
           for example when an attempt is made to open a read-only file for writing.
       - question: How do i fix a java FileNotFoundException?
         answer: |
-          Since FileNotFoundException is a checked exception, a try-catch block should be used to handle it. The try 
-          block should contain the lines of code that can throw the exception and the catch block should 
+          Since FileNotFoundException is a checked exception, a try-catch block should be used to handle it. The try
+          block should contain the lines of code that can throw the exception and the catch block should
           catch and handle the exception appropriately.
       - question: Can you give me an example of a java FileNotFoundException and its fix?
         answer: |
@@ -223,5 +223,5 @@ seed_examples:
 document:
   repo: https://github.com/eformat/my_knowledge2.git
   commit: 1ab2e297a388d7e9ede1e85201b8e513e2b9a82b
-  patterns: 
+  patterns:
     - "*.md"
