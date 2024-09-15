@@ -233,4 +233,4 @@ document:
   repo: https://github.com/eformat/my_knowledge2.git
   commit: 3479d3497dcbab7fe48695f8e79cbe0570cd9994
   patterns:
-    - data.md
+    - tech_industry/java/data.md

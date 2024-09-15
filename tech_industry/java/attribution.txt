@@ -1,4 +1,0 @@
-Title of work: Java Exceptions
-Link to work: https://github.com/eformat/my_knowledge2
-License of the work: CC-BY-SA-4.0
-Creator names: eformat
