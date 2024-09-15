@@ -233,4 +233,4 @@ document:
   repo: https://github.com/eformat/my_knowledge2.git
   commit: 8c3fbe78d511f6c4655316ef6ee8229e09448043
   patterns:
-    - "*.md"
+    - "data.md"
