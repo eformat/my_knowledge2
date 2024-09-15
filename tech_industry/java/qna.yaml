@@ -231,6 +231,6 @@ seed_examples:
             }
 document:
   repo: https://github.com/eformat/my_knowledge2.git
-  commit: 383d93b2896480fee2585130e4dcae7989c3ddc8
+  commit: 3479d3497dcbab7fe48695f8e79cbe0570cd9994
   patterns:
     - data.md
